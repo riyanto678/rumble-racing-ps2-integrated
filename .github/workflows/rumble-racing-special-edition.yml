@@ -32,7 +32,13 @@ jobs:
 
       - name: Set up Rust Android target
         run: rustup target add aarch64-linux-android
-
+        
+      - name: Initialize and verify SPIRV-Tools
+        run: |
+          git submodule update --init --recursive
+          git submodule status --recursive
+          ls -la platforms/android/app/src/main/cpp/3rdparty/shaderc/third_party/
+          
       - name: Build ARMSX2 Android app with Rumble Racing identity
         working-directory: platforms/android
         run: |
